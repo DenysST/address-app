@@ -1,7 +1,6 @@
 package com.example.code.addressapp.service.api;
 
-import com.example.code.addressapp.model.dto.AddressResponseDto;
-import com.example.code.addressapp.model.dto.CoordinatesRequestDto;
+import com.example.code.addressapp.model.dto.CoordinatesDto;
 import com.example.code.addressapp.model.dto.ResponseObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -14,16 +13,18 @@ import java.util.Optional;
 public class GetByCoordinatesApi {
     public static final String URL = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&";
 
-    public Optional<ResponseObject> getResult(CoordinatesRequestDto dto) {
+    public Optional<Object> getResult(CoordinatesDto dto) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<ResponseObject> response = restTemplate.getForEntity(requestMaker(dto), ResponseObject.class);
-        return Optional.ofNullable(response.getBody());
+        ResponseEntity<Map> response = restTemplate.getForEntity(requestMaker(dto), Map.class);
+        return Optional.ofNullable(response.getBody().get("address"));
     }
 
-    private String requestMaker(CoordinatesRequestDto dto) {
+    private String requestMaker(CoordinatesDto dto) {
         return new StringBuilder().append(URL)
+                .append("lat=")
                 .append(dto.getLat())
                 .append("&")
+                .append("lon=")
                 .append(dto.getLon())
                 .toString();
     }

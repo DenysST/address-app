@@ -1,7 +1,9 @@
 package com.example.code.addressapp.controller;
 
+import com.example.code.addressapp.model.Coordinates;
 import com.example.code.addressapp.model.dto.AddressRequestDto;
 import com.example.code.addressapp.model.dto.AddressResponseDto;
+import com.example.code.addressapp.model.dto.CoordinatesDto;
 import com.example.code.addressapp.service.AddressService;
 import com.example.code.addressapp.service.CoordinatesService;
 import lombok.AllArgsConstructor;
@@ -18,12 +20,12 @@ public class AddressController {
     private final AddressService addressService;
 
     @GetMapping("/byCoordinates")
-    public List<AddressResponseDto> byCoordinates() {
+    public List<Object> byCoordinates() {
         return coordinatesService.getAddressesByCoordinates();
     }
 
     @PostMapping("/byAddress")
-    public Map<String, Object> getByAddress(@RequestBody AddressRequestDto dto) {
+    public CoordinatesDto getByAddress(@RequestBody AddressRequestDto dto) {
         return addressService.getByAddress(dto);
     }
 }

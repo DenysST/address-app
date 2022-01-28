@@ -6,5 +6,5 @@ import com.example.code.addressapp.model.dto.AddressResponseDto;
 import java.util.List;
 
 public interface CoordinatesService {
-    List<AddressResponseDto> getAddressesByCoordinates();
+    List<Object> getAddressesByCoordinates();
 }

@@ -22,15 +22,15 @@ public class CoordinatesServiceImpl implements CoordinatesService {
     private final CoordinatesRepository repository;
 
     @Override
-    public List<AddressResponseDto> getAddressesByCoordinates() {
+    public List<Object> getAddressesByCoordinates() {
         List<Coordinates> coordinates = repository.findAll();
-        List<AddressResponseDto> addresses = new ArrayList<>();
+        List<Object> addresses = new ArrayList<>();
         for (Coordinates coordinate : coordinates) {
-            Optional<ResponseObject> result =
+            Optional<Object> result =
                     coordinatesApi.getResult(CoordinatesMapper.toDto(coordinate));
-            ResponseObject responseObject = result.orElseThrow(() ->
+            Object responseObject = result.orElseThrow(() ->
                     new AddressException("Something wrong with Nominatim Api"));
-            addresses.add(responseObject.getAddress());
+            addresses.add(responseObject);
         }
         return addresses;
     }
