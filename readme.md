@@ -1,5 +1,3 @@
-Thank you for your interest in Overonix and for taking the time to complete this assignment.
-
 We would like to ask you to implement a little application.
 
 Mandatory requirements
